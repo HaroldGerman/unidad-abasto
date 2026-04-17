@@ -1,0 +1,26 @@
+<div class="home-container">
+  <h2>Iniciar Sesión</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    
+    <div class="form-group">
+      <label for="login-usuario">Usuario</label>
+      <input type="text" id="login-usuario" formControlName="usuario" placeholder="Ingrese su usuario">
+      <div class="error" *ngIf="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched">
+        El usuario es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="login-contrasena">Contraseña</label>
+      <input type="password" id="login-contrasena" formControlName="contrasena" placeholder="Ingrese su contraseña">
+      <div class="error" *ngIf="loginForm.get('contrasena')?.invalid && loginForm.get('contrasena')?.touched">
+        La contraseña es requerida.
+      </div>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid" class="btn-login">Ingresar</button>
+  </form>
+  <div class="register-section">
+    <p>¿No tienes una cuenta?</p>
+    <button type="button" class="btn-register" routerLink="/registro">Registrarse</button>
+  </div>
+</div>

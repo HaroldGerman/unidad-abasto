@@ -1,0 +1,106 @@
+/* Barra de navegación superior */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: sans-serif;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #800000; /* Color referencial (puedes ajustarlo al de la UNI) */
+}
+
+.nav-links a {
+  text-decoration: none;
+  margin-left: 1rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-login-outline {
+  color: #800000;
+  border: 1px solid #800000;
+}
+
+.btn-login-outline:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-register-filled {
+  background-color: #800000;
+  color: white;
+}
+
+.btn-register-filled:hover {
+  background-color: #5c0000;
+}
+
+/* Sección principal (hero) */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;        /* ¡CLAVE! Permite que los elementos bajen si no caben */
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 76px); /* 100% del alto menos la barra de navegación */
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  text-align: center;
+  padding: 2rem;
+  font-family: sans-serif;
+  color: #333;
+  min-height: 80vh;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.hero-content {
+  flex: 1;                /* Toma el espacio disponible */
+  min-width: 300px;       /* No se encoge más de esto */
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: #222;
+  margin-bottom: 1rem;
+  
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Contenedor de las imágenes */
+.hero-images {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Las pone una debajo de otra como en tu segunda foto */
+  gap: 1.5rem;
+  min-width: 300px;
+  align-items: center;    /* Centra las imágenes en su columna */
+}
+/* Estilos para las imágenes */
+.img-clean {
+  width: 100%;            /* Ocupa el ancho de su columna */
+  max-width: 450px;       /* Pero no crece más de 450px */
+  height: auto;           /* Mantiene la proporción */
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.img-clean:hover {
+  transform: translateY(-10px); /* Efecto de flotado al pasar el mouse */
+}
