@@ -20,3 +20,31 @@ El objetivo es desarrollar un software que **automatice integralmente** los proc
 * **Agilidad:** Reducción drástica del tiempo de tránsito de los productos necesarios en cada dependencia.
 * **Precisión:** Control permanente, automático y confiable del inventario físico en el almacén.
 * **Transparencia:** Trazabilidad de cada producto, desde el requerimiento de compra hasta la conformidad de recepción final.
+
+##  Planificación y Fases del Proyecto
+
+Para el desarrollo de este sistema, se ha estructurado el trabajo en fases basadas en el ciclo de vida de desarrollo de software, asegurando la calidad en cada entrega:
+
+###  Fases de Desarrollo
+
+* **Análisis de Requerimientos:** Identificación de las necesidades críticas de la Unidad de Abastecimiento.
+* **Diseño del Sistema:** Modelado de la arquitectura, bases de datos y diseño de interfaces de usuario (UI/UX).
+* **Implementación (Backend/Frontend):** Desarrollo de los módulos de Gestión de Solicitudes, Órdenes de Compra e Inventario.
+* **Pruebas y QA:** Verificación de flujos de trabajo (validación de PECOSA, estados de pedidos pendientes).
+* **Despliegue y Mantenimiento:** Puesta en marcha en el entorno de la Unidad de Abastecimiento.
+
+###  Cronograma de Ejecución
+
+| Actividad | Entregable |
+| :--- | :--- |
+| **Definición del Problema** | Documento de alcance y objetivos |
+| **Modelado de Procesos** | Diagramas de flujo (Orden de Compra, PECOSA, Kardex) |
+| **Desarrollo de Módulos** | Código fuente del sistema de gestión |
+| **Control de Calidad** | Reporte de pruebas y validación de usuario |
+
+###  Tecnologías Utilizadas
+
+* **Frontend:** Angular (para una interfaz dinámica y reactiva).
+* **Backend:** Java con Spring Boot (siguiendo los requerimientos de robustez del sistema).
+* **Base de Datos:** PostgreSQL para la gestión persistente del Kardex y documentos oficiales.
+* **Herramientas:** Git para el control de versiones y metodologías ágiles para el seguimiento.
