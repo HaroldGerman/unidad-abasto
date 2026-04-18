@@ -1,6 +1,6 @@
-## 📦 Caso de Estudio: Sistema de Gestión de Abastecimiento (UNI)
+##  Caso de Estudio: Sistema de Gestión de Abastecimiento (UNI)
 
-### 🚩 Problemática Actual
+###  Problemática Actual
 [cite_start]Actualmente, la **Unidad de Abastecimiento** de la Universidad Nacional de Ingeniería gestiona los recursos circulantes de manera **completamente manual**[cite: 1, 4]. [cite_start]El uso exclusivo de documentos en papel como la orden de compra, la PECOSA y el kardex genera ineficiencias en el control de inventarios y lentitud en el flujo de productos hacia las dependencias universitarias[cite: 2, 4].
 
 **Puntos críticos identificados:**
@@ -8,7 +8,7 @@
 * [cite_start]**Control de Inventario:** El registro de entradas y salidas se realiza en un **Kardex manual**, dificultando la verificación inmediata de existencias y la actualización de datos[cite: 4, 15].
 * [cite_start]**Atención a Dependencias:** Las solicitudes enfrentan cuellos de botella al validar disponibilidad en almacén y generar manualmente la documentación de salida (PECOSA)[cite: 9, 10].
 
-### 🛠️ Solución Propuesta
+###  Solución Propuesta
 [cite_start]El objetivo es desarrollar un software que **automatice integralmente** los procesos de la unidad[cite: 3]. El sistema permitirá:
 
 * [cite_start]**Automatización de Flujos:** Digitalizar la gestión de requerimientos, proformas y órdenes de compra para agilizar la comunicación con proveedores[cite: 3, 6].
