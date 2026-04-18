@@ -16,7 +16,7 @@
 * [cite_start]**Optimización de Despacho:** Agilizar la generación, firma y archivo de la **PECOSA**, asegurando que los productos lleguen a las dependencias en tiempo oportuno[cite: 5, 9, 11].
 * [cite_start]**Validación de Recepción:** Módulo para verificar que los productos entregados por proveedores o recibidos por dependencias estén en buen estado y sean válidos según lo solicitado[cite: 8, 12].
 
-### 🎯 Beneficios Esperados
+###  Beneficios Esperados
 * [cite_start]**Agilidad:** Reducción drástica del tiempo de tránsito de los productos necesarios en cada dependencia[cite: 2, 5].
 * [cite_start]**Precisión:** Control permanente, automático y confiable del inventario físico en el almacén[cite: 2, 3].
 * [cite_start]**Transparencia:** Trazabilidad de cada producto, desde el requerimiento de compra hasta la conformidad de recepción final[cite: 6, 12].
