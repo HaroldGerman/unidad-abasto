@@ -1,3 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  /*background-color: #ffffff;*/
+  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+  font-family: sans-serif;
+}
+
+.btn-inicio {
+  color: #800000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #800000; /* Color referencial (puedes ajustarlo al de la UNI) */
+}
+
+.nav-links a {
+  text-decoration: none;
+  margin-left: 1rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-login-outline {
+  color: #800000;
+  border: 1px solid #800000;
+}
+
+.btn-login-outline:hover {
+  background-color: #f8f9fa;
+}
+
+
+.btn-inicio:hover {
+  background-color: #f8f9fa4b;
+}
+
 .registro-container {
   max-width: 400px;
   margin: 2rem auto;
@@ -6,6 +49,14 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   font-family: sans-serif;
+  background: #fdfbfd; /* Fondo blanco con un poco de transparencia */
+
+  /* --- AÑADE ESTO PARA CENTRAR --- */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 100%; /* Para que el max-width funcione bien en móviles */
 }
 
 .form-group {

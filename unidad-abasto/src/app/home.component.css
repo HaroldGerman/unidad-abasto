@@ -1,3 +1,24 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  /*background-color: #ffffff;*/
+  /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+  font-family: sans-serif;
+}
+
+.btn-inicio {
+  color: #800000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #800000; /* Color referencial (puedes ajustarlo al de la UNI) */
+}
+
+
 .home-container {
   max-width: 400px;
   margin: 2rem auto;
@@ -6,6 +27,14 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   font-family: sans-serif;
+  background: #fdfbfd;
+
+  /* --- AÑADE ESTO PARA CENTRAR --- */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 100%; /* Para que el max-width funcione bien en móviles */
 }
 
 h2 {
