@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-image: url('/images/fondo.jpg'); /* Ruta de la imagen de fondo */
+  background-color: #ecac93; /* Color de respaldo */
+  background-image: 
+    radial-gradient(at 0% 0%, rgb(113, 108, 143) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, rgb(194, 194, 194) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, rgb(228, 160, 184) 0, transparent 50%);
+  height: 100vh;
+  margin: 0;
   background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   background-position: center; /* Centra la imagen */
   background-attachment: fixed; /* Fija el fondo al hacer scroll */
-  
 }
