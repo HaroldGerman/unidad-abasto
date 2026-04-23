@@ -2,13 +2,17 @@
   <div class="logo"><a routerLink="/inicio" class="btn-inicio">S.A. UNI</a></div>
 </header>
 
+<div *ngIf="errorMessage" class="alerta-error">
+  {{ errorMessage }}
+</div>
+
 <div class="home-container">
   <h2>Iniciar Sesión</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     
     <div class="form-group">
       <label for="login-usuario">Usuario</label>
-      <input type="text" id="login-usuario" formControlName="usuario" placeholder="Ingrese su usuario">
+      <input type="text" id="login-usuario" formControlName="usuario" placeholder="Ingrese su usuario" (input)="errorMessage=''">
       <div class="error" *ngIf="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched">
         El usuario es requerido.
       </div>
@@ -16,7 +20,7 @@
 
     <div class="form-group">
       <label for="login-contrasena">Contraseña</label>
-      <input type="password" id="login-contrasena" formControlName="contrasena" placeholder="Ingrese su contraseña">
+      <input type="password" id="login-contrasena" formControlName="contrasena" placeholder="Ingrese su contraseña" (input)="errorMessage=''">
       <div class="error" *ngIf="loginForm.get('contrasena')?.invalid && loginForm.get('contrasena')?.touched">
         La contraseña es requerida.
       </div>
@@ -28,3 +32,4 @@
     <button type="button" class="btn-register" routerLink="/registro">Registrarse</button>
   </div>
 </div>
+
