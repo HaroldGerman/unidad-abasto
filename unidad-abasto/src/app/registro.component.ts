@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegistroComponent {
   registroForm: FormGroup;
-  roles: string[] = ['Administrador', 'Usuario'];
+  roles: string[] = ['Administrador', 'Dependencia', 'Personal de Apoyo', 'Jefe de Oficina', 'Director Administrativo'];
 
   constructor(
     private fb: FormBuilder,
