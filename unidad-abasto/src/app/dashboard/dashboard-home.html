@@ -1,0 +1,22 @@
+<h1 class="title">Panel de abasto</h1>
+<p class="subtitle">Elegí una opción según tu rol en la unidad.</p>
+
+<div class="alert" *ngIf="denied">
+  No tenés permiso para acceder a ese módulo. Si necesitás acceso, contactá a un administrador.
+</div>
+
+<div class="empty" *ngIf="!options.length && !denied">
+  No hay opciones asignadas para tu rol todavía. Verificá con el administrador o que el inicio de sesión devuelva el campo de rol correctamente.
+</div>
+
+<div class="grid">
+  <a
+    class="card"
+    *ngFor="let o of options"
+    [routerLink]="['/dashboard', o.path]"
+  >
+    <h2 class="card-title">{{ o.title }}</h2>
+    <p class="card-desc">{{ o.description }}</p>
+    <span class="card-cta">Abrir →</span>
+  </a>
+</div>
