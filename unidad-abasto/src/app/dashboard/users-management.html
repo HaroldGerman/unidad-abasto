@@ -1,0 +1,114 @@
+<!-- dashboard/users-management.html -->
+<div class="users-shell">
+  <header class="head">
+    <h1>Gestión de Usuarios y Permisos</h1>
+    <a routerLink="/dashboard" class="back">Volver al panel</a>
+  </header>
+
+  <p class="hint">
+    <strong>Usuarios del sistema:</strong> Los usuarios que se muestran a continuación son los registrados en el sistema (no administradores).
+    Puedes gestionar sus permisos por módulo y suspender su acceso temporalmente.
+  </p>
+
+  <p class="message" *ngIf="message">{{ message }}</p>
+
+  <!-- Mostrar usuarios del backend -->
+  <section class="card" *ngIf="showBackendUsers">
+    <h2>Usuarios del Sistema</h2>
+    <p class="small">Usuarios registrados (excluyendo administradores).</p>
+    
+    <div class="loading" *ngIf="loading">
+      <p>Cargando usuarios...</p>
+    </div>
+
+    <div class="empty" *ngIf="!loading && backendUsers.length === 0">
+      No hay usuarios registrados en el sistema aún. Los usuarios deben registrarse primero.
+    </div>
+
+    <div class="table-wrap" *ngIf="!loading && backendUsers.length">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Rol actual</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of backendUsers">
+            <td><strong>{{ user.username }}</strong></td>
+            <td>
+              <select [value]="user.rol" (change)="cambiarRol(user, $any($event.target).value)">
+                <option value="user">Usuario Normal</option>
+                <option value="dependencia">Dependencia</option>
+                <option value="personal_apoyo">Personal de Apoyo</option>
+                <option value="jefe_oficina">Jefe de Oficina</option>
+                <option value="director">Director Administrativo</option>
+              </select>
+            </td>
+            <td>
+              <span class="badge" [class.badge-active]="!estaSuspendido(user.username)" [class.badge-suspended]="estaSuspendido(user.username)">
+                {{ estaSuspendido(user.username) ? 'Suspendido' : 'Activo' }}
+              </span>
+            </td>
+            <td>
+              <button class="ghost" (click)="toggleSuspension(user.username)" [title]="estaSuspendido(user.username) ? 'Reactivar acceso' : 'Suspender acceso'">
+                {{ estaSuspendido(user.username) ? 'Reactivar' : 'Suspender' }}
+              </button>
+              <button class="ghost" (click)="abrirPermisos(user.username)">Configurar permisos</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Sección de permisos por módulo (colapsable) -->
+  <section class="card" *ngIf="usuarioSeleccionado">
+    <h2>Permisos por módulo: {{ usuarioSeleccionado }}</h2>
+    <button class="close-btn" (click)="cerrarPermisos()">Cerrar</button>
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Módulo</th>
+            <th>Permiso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of menu">
+            <td>{{ o.title }}</td>
+            <td>
+              <select [value]="getPermisoUsuario(usuarioSeleccionado, o.path)" (change)="setModulePermForUser(usuarioSeleccionado, o.path, $any($event.target).value)">
+                <option value="inherit">Según rol</option>
+                <option value="allow">Permitir</option>
+                <option value="deny">Denegar</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Agregar usuario manualmente</h2>
+    <p class="small">Si un usuario no aparece en la lista, puedes agregarlo manualmente.</p>
+    <form [formGroup]="linkForm" (ngSubmit)="addForPermissionManagement()" class="form-inline">
+      <label for="link-username" class="sr-only">Usuario</label>
+      <input
+        id="link-username"
+        type="text"
+        formControlName="username"
+        placeholder="Nombre de usuario registrado"
+        autocomplete="username"
+      />
+      <button type="submit">Agregar a gestión</button>
+    </form>
+    <small class="error" *ngIf="linkForm.get('username')?.invalid && linkForm.get('username')?.touched">
+      Mínimo 4 caracteres.
+    </small>
+  </section>
+</div>

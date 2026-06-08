@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ export class HomeComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       usuario: ['', Validators.required],
@@ -30,23 +30,22 @@ export class HomeComponent {
     if (this.loginForm.valid) {
       const { usuario, contrasena } = this.loginForm.value;
 
-      //Llamamos al backend de Spring Boot para validar las credenciales
-      this.http.post('http://localhost:8080/api/usuarios/login',{
-        username: usuario,
-        password: contrasena
-      }).subscribe({
-          next: (response: any) => {
-            localStorage.setItem('usuario', JSON.stringify(response));
-            console.log('Login exitoso:', response);
-
-            //HU02: Aquí podria guardar el rol en localStorage o en un servicio de autenticación para usarlo en otras partes de la app
-            this.router.navigate(['/inicio']); //Redirigimos si es correcto
-          },
+      this.authService.login(usuario, contrasena).subscribe({
+        next: (response: any) => {
+          console.log('Login exitoso:', response);
+          this.router.navigate(['/dashboard']);
+        },
         error: (err) => {
           console.error('Error en el login:', err);
-          this.errorMessage = err.error || 'Credenciales incorrectas';
+          if (err.status === 0) {
+            this.errorMessage = 'No se puede conectar al servidor. Verifica que el backend esté ejecutándose en http://localhost:8080';
+          } else if (err.status === 401) {
+            this.errorMessage = 'Usuario o contraseña incorrectos';
+          } else {
+            this.errorMessage = err.error || 'Credenciales incorrectas';
+          }
         }
-      })
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }

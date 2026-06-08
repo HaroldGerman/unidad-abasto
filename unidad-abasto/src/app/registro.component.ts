@@ -1,5 +1,6 @@
+// registro.component.ts - Actualizado
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule,  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -13,13 +14,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegistroComponent {
   registroForm: FormGroup;
-  roles: string[] = ['Administrador', 'Dependencia', 'Personal de Apoyo', 'Jefe de Oficina', 'Director Administrativo'];
+  // Roles del frontend - ahora con valores que coinciden con el backend
+  roles: { label: string; value: string }[] = [
+    { label: 'Administrador', value: 'admin' },
+    { label: 'Dependencia', value: 'dependencia' },
+    { label: 'Personal de Apoyo', value: 'personal_apoyo' },
+    { label: 'Jefe de Oficina', value: 'jefe_oficina' },
+    { label: 'Director Administrativo', value: 'director' },
+    { label: 'Proveedor', value: 'proveedor' }
+  ];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient
-    ) {
+  ) {
     this.registroForm = this.fb.group({
       usuario: ['', [Validators.required, Validators.minLength(4)]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]],
@@ -28,26 +37,23 @@ export class RegistroComponent {
   }
 
   onSubmit() {
-  if (this.registroForm.valid) {
-    const { usuario, contrasena, rol } = this.registroForm.value;
+    if (this.registroForm.valid) {
+      const { usuario, contrasena, rol } = this.registroForm.value;
 
-    // 1. Llamamos al servidor
-    this.http.post('http://localhost:8080/api/usuarios/registro', {
-      username: usuario,
-      password: contrasena,
-      rol: rol
+      this.http.post('http://localhost:8080/api/usuarios/registro', {
+        username: usuario,
+        password: contrasena,
+        rol: rol  // Enviamos el valor directamente (ej: 'dependencia')
       }).subscribe({
-        // EL 'next' SOLO ocurre cuando el servidor responde "OK"
         next: (res) => {
-          alert('¡Registro exitoso! Ahora puedes iniciar sesión.'); // La alerta ahora es real
-          this.router.navigate(['/inicio']); 
+          alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+          this.router.navigate(['/login']);
         },
-        // EL 'error' ocurre si el servidor falla (ej: usuario duplicado)
         error: (err) => {
-          alert('Hubo un error: ' + (err.error || 'No se pudo conectar con el servidor'));
+          console.error('Error en registro:', err);
+          alert('Error: ' + (err.error || 'No se pudo registrar el usuario.'));
         }
       });
-      
     } else {
       this.registroForm.markAllAsTouched();
     }
