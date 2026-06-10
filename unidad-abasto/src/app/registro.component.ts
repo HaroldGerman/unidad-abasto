@@ -39,11 +39,14 @@ export class RegistroComponent {
   onSubmit() {
     if (this.registroForm.valid) {
       const { usuario, contrasena, rol } = this.registroForm.value;
+      // Mapear el valor seleccionado al label que espera la base de datos
+      const selectedRole = this.roles.find(r => r.value === rol);
+      const rolToSend = selectedRole ? selectedRole.label : rol; // fallback si no se encuentra
 
       this.http.post('http://localhost:8080/api/usuarios/registro', {
         username: usuario,
         password: contrasena,
-        rol: rol  // Enviamos el valor directamente (ej: 'dependencia')
+        rol: rolToSend
       }).subscribe({
         next: (res) => {
           alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
