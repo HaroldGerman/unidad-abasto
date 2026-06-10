@@ -30,7 +30,7 @@
       <label for="rol">Rol</label>
       <select id="rol" formControlName="rol">
         <option value="" disabled selected>Seleccione un rol</option>
-        <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+        <option *ngFor="let rol of roles" [value]="rol.value">{{ rol.label }}</option>
       </select>
       <div class="error" *ngIf="registroForm.get('rol')?.invalid && registroForm.get('rol')?.touched">
         Debe seleccionar un rol.
