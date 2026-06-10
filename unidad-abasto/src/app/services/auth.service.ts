@@ -1,8 +1,8 @@
 // auth.service.ts - Versión completa y corregida
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
 export interface Usuario {
@@ -10,6 +10,7 @@ export interface Usuario {
   username: string;
   password: string;
   rol: string;
+  activo?: boolean;
 }
 
 @Injectable({
@@ -73,6 +74,18 @@ export class AuthService {
   // PUT - Actualizar rol de usuario
   updateUsuarioRol(id: number, rol: string): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.usuariosUrl}/${id}/rol`, { rol });
+  }
+
+  // PUT - Actualizar estado de activo del usuario
+  updateUsuarioActivo(id: number, activo: boolean): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.usuariosUrl}/${id}/activo`, { activo }).pipe(
+      catchError((err) => {
+        if (err.status === 404 || err.status === 405) {
+          return this.http.put<Usuario>(`${this.usuariosUrl}/${id}`, { activo });
+        }
+        return throwError(() => err);
+      })
+    );
   }
 
   // DELETE - Eliminar usuario

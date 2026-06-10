@@ -36,15 +36,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of backendUsers">
+          <tr *ngFor="let user of backendUsers; trackBy: trackByBackendUser">
             <td><strong>{{ user.username }}</strong></td>
             <td>
-              <select [value]="user.rol" (change)="cambiarRol(user, $any($event.target).value)">
-                <option value="user">Usuario Normal</option>
-                <option value="dependencia">Dependencia</option>
-                <option value="personal_apoyo">Personal de Apoyo</option>
-                <option value="jefe_oficina">Jefe de Oficina</option>
-                <option value="director">Director Administrativo</option>
+              <select [(ngModel)]="roleSelection[user.username]" (ngModelChange)="cambiarRol(user, $event)">
+                <option *ngFor="let rol of rolesDisponibles" [value]="rol.value">
+                  {{ rol.label }}
+                </option>
               </select>
             </td>
             <td>
@@ -53,8 +51,18 @@
               </span>
             </td>
             <td>
-              <button class="ghost" (click)="toggleSuspension(user.username)" [title]="estaSuspendido(user.username) ? 'Reactivar acceso' : 'Suspender acceso'">
-                {{ estaSuspendido(user.username) ? 'Reactivar' : 'Suspender' }}
+              <button
+                class="ghost"
+                (click)="toggleSuspension(user.username)"
+                [disabled]="updatingSuspension[user.username]"
+                [title]="estaSuspendido(user.username) ? 'Reactivar acceso' : 'Suspender acceso'"
+              >
+                <ng-container *ngIf="!updatingSuspension[user.username]">
+                  {{ estaSuspendido(user.username) ? 'Reactivar' : 'Suspender' }}
+                </ng-container>
+                <ng-container *ngIf="updatingSuspension[user.username]">
+                  Procesando...
+                </ng-container>
               </button>
               <button class="ghost" (click)="abrirPermisos(user.username)">Configurar permisos</button>
             </td>
